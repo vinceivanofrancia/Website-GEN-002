@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submerged Funds: Flood Control Crisis</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Fade animation for page transitions */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Custom animations for background */
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 6s infinite;
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        /* Utility to hide/show pages */
+        .page-section {
+            display: none;
+            min-height: calc(100vh - 64px); /* Full height minus nav */
+        }
+        .page-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 flex flex-col min-h-screen">
+
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 z-50 glass-nav text-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo / Site Title -->
+                <button onclick="showPage('home')" class="flex items-center space-x-2 font-bold text-xl tracking-tight hover:opacity-80 transition focus:outline-none">
+                    <i data-lucide="droplets" class="text-blue-400"></i>
+                    <span>Submerged<span class="text-blue-400">Funds</span></span>
+                </button>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="showPage('home')" class="nav-link text-blue-400 flex items-center space-x-1 transition-colors" id="nav-home">
+                        <i data-lucide="droplets" size="18"></i>
+                        <span>Home</span>
+                    </button>
+                    <button onclick="showPage('profile')" class="nav-link text-gray-300 hover:text-blue-400 flex items-center space-x-1 transition-colors" id="nav-profile">
+                        <i data-lucide="users" size="18"></i>
+                        <span>Our Team</span>
+                    </button>
+                    <button onclick="showPage('analysis')" class="nav-link text-gray-300 hover:text-blue-400 flex items-center space-x-1 transition-colors" id="nav-analysis">
+                        <i data-lucide="shield-alert" size="18"></i>
+                        <span>The Issue</span>
+                    </button>
+                    <button onclick="showPage('solutions')" class="nav-link text-gray-300 hover:text-blue-400 flex items-center space-x-1 transition-colors" id="nav-solutions">
+                        <i data-lucide="lightbulb" size="18"></i>
+                        <span>Solutions</span>
+                    </button>
+                    <button onclick="showPage('sources')" class="nav-link text-gray-300 hover:text-blue-400 flex items-center space-x-1 transition-colors" id="nav-sources">
+                        <i data-lucide="book-open" size="18"></i>
+                        <span>Sources</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none">
+                        <i data-lucide="menu" size="24"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-800 pb-4 px-4 shadow-inner absolute w-full top-16 left-0 z-40">
+            <button onclick="showPage('home')" class="mobile-link block w-full text-left py-3 px-2 text-sm font-medium border-b border-slate-700 text-blue-400 bg-slate-700/50" id="mobile-nav-home">
+                <span class="flex items-center space-x-3">
+                    <i data-lucide="droplets" size="18"></i>
+                    <span>Home</span>
+                </span>
+            </button>
+            <button onclick="showPage('profile')" class="mobile-link block w-full text-left py-3 px-2 text-sm font-medium border-b border-slate-700 text-gray-300 hover:text-blue-400 hover:bg-slate-700/50" id="mobile-nav-profile">
+                <span class="flex items-center space-x-3">
+                    <i data-lucide="users" size="18"></i>
+                    <span>Our Team</span>
+                </span>
+            </button>
+            <button onclick="showPage('analysis')" class="mobile-link block w-full text-left py-3 px-2 text-sm font-medium border-b border-slate-700 text-gray-300 hover:text-blue-400 hover:bg-slate-700/50" id="mobile-nav-analysis">
+                <span class="flex items-center space-x-3">
+                    <i data-lucide="shield-alert" size="18"></i>
+                    <span>The Issue</span>
+                </span>
+            </button>
+            <button onclick="showPage('solutions')" class="mobile-link block w-full text-left py-3 px-2 text-sm font-medium border-b border-slate-700 text-gray-300 hover:text-blue-400 hover:bg-slate-700/50" id="mobile-nav-solutions">
+                <span class="flex items-center space-x-3">
+                    <i data-lucide="lightbulb" size="18"></i>
+                    <span>Solutions</span>
+                </span>
+            </button>
+            <button onclick="showPage('sources')" class="mobile-link block w-full text-left py-3 px-2 text-sm font-medium border-b border-slate-700 text-gray-300 hover:text-blue-400 hover:bg-slate-700/50" id="mobile-nav-sources">
+                <span class="flex items-center space-x-3">
+                    <i data-lucide="book-open" size="18"></i>
+                    <span>Sources</span>
+                </span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow relative">
+
+        <!-- PAGE: HOME -->
+        <section id="home" class="page-section active fade-in">
+            <div class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
+                <!-- Abstract Background Elements -->
+                <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+                    <div class="absolute top-10 left-10 w-64 h-64 bg-blue-500 rounded-full blur-3xl animate-pulse-slow"></div>
+                    <div class="absolute bottom-10 right-10 w-96 h-96 bg-cyan-600 rounded-full blur-3xl animate-pulse-slow"></div>
+                </div>
+                
+                <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                    <div class="inline-block mb-4 px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-sm font-semibold tracking-wider uppercase">
+                        Political Consciousness Project
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tighter">
+                        The Flood Control <br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Crisis Analysis</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto font-light">
+                        Billions of pesos allocated. Thousands of projects planned. 
+                        <strong class="text-white font-semibold"> Why do the waters still rise?</strong>
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="showPage('analysis')" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/50 flex items-center justify-center cursor-pointer">
+                            Read the Analysis <i data-lucide="chevron-right" class="ml-2"></i>
+                        </button>
+                        <button onclick="showPage('profile')" class="bg-slate-700 hover:bg-slate-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all border border-slate-500 flex items-center justify-center cursor-pointer">
+                            Meet the Team
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: PROFILE -->
+        <section id="profile" class="page-section fade-in bg-slate-50">
+            <div class="py-20 px-6">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Website Owners' Profile</h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                            We are students dedicated to bringing transparency to social issues. 
+                            Balancing academic rigor with personal well-being is part of our journey.
+                        </p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Member 1 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-xl">S</div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-bold text-slate-800">Student Name 1</h3>
+                                    <p class="text-sm text-blue-600 font-medium">Lead Researcher</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 flex-grow">"Political awareness starts with asking where the money goes."</p>
+                            <div class="mt-auto pt-4 border-t border-gray-100">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-1">Self-Care Practice</p>
+                                <p class="text-slate-700 flex items-center">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                                    Daily 30-minute digital detox & jogging.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-xl">S</div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-bold text-slate-800">Student Name 2</h3>
+                                    <p class="text-sm text-blue-600 font-medium">Web Developer</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 flex-grow">"Design is not just how it looks, but how it communicates truth."</p>
+                            <div class="mt-auto pt-4 border-t border-gray-100">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-1">Self-Care Practice</p>
+                                <p class="text-slate-700 flex items-center">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                                    Reading fiction novels before sleep.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col h-full">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center text-white font-bold text-xl">S</div>
+                                <div class="ml-4">
+                                    <h3 class="text-lg font-bold text-slate-800">Student Name 3</h3>
+                                    <p class="text-sm text-blue-600 font-medium">Fact Checker</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 italic mb-6 flex-grow">"In an era of misinformation, citations are our best defense."</p>
+                            <div class="mt-auto pt-4 border-t border-gray-100">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-wide mb-1">Self-Care Practice</p>
+                                <p class="text-slate-700 flex items-center">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
+                                    Weekend hiking and nature photography.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: ANALYSIS -->
+        <section id="analysis" class="page-section fade-in bg-white">
+            <div class="py-20 px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-12 border-l-4 border-blue-600 pl-6">
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-2">The Issue: A Flood of Corruption?</h2>
+                        <p class="text-xl text-gray-500">An analysis of the 2024 Flood Control Scandal</p>
+                    </div>
+
+                    <div class="space-y-12">
+                        <!-- Topic 1 -->
+                        <div class="prose max-w-none">
+                            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                                <i data-lucide="trending-up" class="text-red-500 mr-3"></i>
+                                The Budget vs. The Reality
+                            </h3>
+                            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                                Under the current administration, the Department of Public Works and Highways (DPWH) was allocated a staggering 
+                                <span class="font-bold text-slate-900 bg-yellow-100 px-1 mx-1">₱545 billion</span> for flood control projects. 
+                                Despite this massive funding—larger than the budget for agriculture or defense—Metro Manila and nearby provinces were submerged during Typhoon Carina in 2024.
+                            </p>
+                            <ul class="list-disc pl-6 space-y-3 text-gray-700">
+                                <li>
+                                    <strong class="text-slate-900">421+ "Ghost Projects":</strong> Senate hearings revealed hundreds of projects that were paid for but either never existed or were abandoned.
+                                </li>
+                                <li>
+                                    <strong class="text-slate-900">Zero Allocations in Critical Areas:</strong> Investigations found that flood-prone towns in Bulacan received zero flood control infrastructure, while funds were diverted to non-critical districts favored by politicians.
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Topic 2 -->
+                        <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                            <h3 class="text-2xl font-bold text-slate-800 mb-4 flex items-center">
+                                <i data-lucide="shield-alert" class="text-orange-500 mr-3"></i>
+                                Allegations of Systemic Corruption
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                The core of the scandal involves allegations of a "kickback" system embedded in the infrastructure sector.
+                            </p>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-gray-700">
+                                        <strong class="text-slate-900">The 20-40% Kickback Scheme:</strong> Witnesses at Senate hearings testified that up to 40% of a project's total cost is siphoned off as bribes to legislators and district engineers.
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-gray-700">
+                                        <strong class="text-slate-900">Substandard Materials:</strong> To recover the cost of bribes, contractors allegedly use cheaper, substandard cement and steel, resulting in dikes and spillways that crumble under pressure.
+                                    </span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                                    <span class="text-gray-700">
+                                        <strong class="text-slate-900">Monopoly of Contracts:</strong> A specific group of contractors (e.g., relating to the Discayas and Cos) reportedly cornered billions in contracts.
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Topic 3 -->
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800 mb-4">The Human Cost</h3>
+                            <p class="text-gray-700 text-lg leading-relaxed">
+                                The failure is not just financial; it is humanitarian. The lack of effective flood control has led to:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-4 mt-6">
+                                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                    <h4 class="font-bold text-blue-900">Displacement</h4>
+                                    <p class="text-sm text-blue-800">Thousands of families in Metro Manila and Bulacan lose their homes annually due to rising waters.</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                                    <h4 class="font-bold text-blue-900">Economic Loss</h4>
+                                    <p class="text-sm text-blue-800">Billions in agricultural crops and business revenue are wiped out, keeping the poorest sectors in poverty.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: SOLUTIONS -->
+        <section id="solutions" class="page-section fade-in bg-gradient-to-b from-slate-50 to-white">
+            <div class="py-20 px-6">
+                <div class="max-w-5xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Recommendations & Solutions</h2>
+                    <p class="text-gray-600">Moving from corruption to construction: How we fix the crisis.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Solution 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all">
+                        <div class="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-blue-600">
+                            <i data-lucide="file-text" size="28"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Digital Accountability</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Implement <strong>Blockchain-based procurement</strong>. By digitizing the bidding and payment process, every peso can be tracked in real-time, making "ghost projects" impossible to hide from public audit.
+                        </p>
+                    </div>
+
+                    <!-- Solution 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all">
+                        <div class="bg-green-100 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-green-600">
+                            <i data-lucide="droplets" size="28"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Nature-Based Solutions</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Shift focus from purely concrete structures to <strong>"Sponge City" concepts</strong>. Restore wetlands, mangroves, and permeable surfaces that naturally absorb water.
+                        </p>
+                    </div>
+
+                    <!-- Solution 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-all">
+                        <div class="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mb-6 text-purple-600">
+                            <i data-lucide="users" size="28"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Citizen Oversight</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Institutionalize <strong>Participatory Auditing</strong>. Allow NGOs and civil society groups to inspect projects during construction ensuring specifications are met before payments are released.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE: SOURCES -->
+        <section id="sources" class="page-section fade-in bg-slate-900 text-gray-400">
+            <div class="py-20 px-6">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl font-bold text-white mb-8 flex items-center">
+                        <i data-lucide="book-open" class="mr-3 text-blue-500"></i>
+                        References & Credible Sources
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="border-b border-slate-700 pb-4">
+                            <p class="text-white font-semibold text-lg mb-1">"Flood control projects scandal in the Philippines"</p>
+                            <p class="text-sm mb-2">Wikipedia & Senate Blue Ribbon Committee Reports (2024-2025). Detailed timeline of allegations regarding ghost projects.</p>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">Accessed November 20, 2025</a>
+                        </div>
+                        
+                        <div class="border-b border-slate-700 pb-4">
+                            <p class="text-white font-semibold text-lg mb-1">"Flood control corruption an obscene plunder of much-needed climate funds"</p>
+                            <p class="text-sm mb-2">Greenpeace Philippines (September 2025). Analysis of climate fund mismanagement.</p>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">Accessed November 20, 2025</a>
+                        </div>
+
+                        <div class="border-b border-slate-700 pb-4">
+                            <p class="text-white font-semibold text-lg mb-1">"Philippine flood-control projects made substandard to allow huge kickbacks"</p>
+                            <p class="text-sm mb-2">Associated Press (AP News, September 2025). Coverage of witness testimonies regarding substandard materials.</p>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">Accessed November 20, 2025</a>
+                        </div>
+
+                        <div class="border-b border-slate-700 pb-4">
+                            <p class="text-white font-semibold text-lg mb-1">"How flood control projects fail the poor in the Philippines"</p>
+                            <p class="text-sm mb-2">Context by TRF (September 2025). Investigation into the misalignment of projects vs. flood hazard areas.</p>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">Accessed November 20, 2025</a>
+                        </div>
+
+                         <div class="border-b border-slate-700 pb-4">
+                            <p class="text-white font-semibold text-lg mb-1">"Excessive Flooding in Metro Manila... and what can be done"</p>
+                            <p class="text-sm mb-2">Integrated Rural Development Foundation. Data on economic costs and alternative engineering solutions.</p>
+                            <a href="#" class="text-blue-400 hover:text-blue-300 text-sm">Accessed November 20, 2025</a>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 pt-8 border-t border-slate-800 text-center text-sm">
+                        <p>Project for GEN 002 P3 Exam | A Web Journey: Political Consciousness</p>
+                        <p class="mt-2">© 2025 Student Group Name. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // --- SINGLE PAGE APPLICATION LOGIC ---
+
+        function showPage(pageId) {
+            // 1. Hide all pages
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            // 2. Show the selected page
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+                // Trigger a reflow to restart animation if needed (optional, simpler to just leave class)
+            }
+
+            // 3. Update Desktop Navigation Styling
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                // Reset to default style
+                link.classList.remove('text-blue-400'); 
+                link.classList.add('text-gray-300');
+                
+                // If this link matches the active page, highlight it
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.remove('text-gray-300');
+                    link.classList.add('text-blue-400');
+                }
+            });
+
+            // 4. Update Mobile Navigation Styling
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            mobileLinks.forEach(link => {
+                // Reset
+                link.classList.remove('text-blue-400', 'bg-slate-700/50');
+                link.classList.add('text-gray-300');
+
+                // Highlight
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.remove('text-gray-300');
+                    link.classList.add('text-blue-400', 'bg-slate-700/50');
+                }
+            });
+
+            // 5. Scroll to top (important for feeling like a new page)
+            window.scrollTo(0, 0);
+
+            // 6. Close mobile menu if open
+            const menu = document.getElementById('mobile-menu');
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        }
+
+        // --- MOBILE MENU LOGIC ---
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
